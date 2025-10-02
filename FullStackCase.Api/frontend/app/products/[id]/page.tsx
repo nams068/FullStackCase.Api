@@ -23,7 +23,7 @@ export default function ProductDetail({ params }: PageProps) {
             } finally {
                 setLoading(false);
             }
-        }; 
+        };  
 
         fetchProduct();
     }, [params.id]);
