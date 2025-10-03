@@ -23,21 +23,25 @@ export default function ProductDetail({ params }: PageProps) {
             } finally {
                 setLoading(false);
             }
-        };  
-
+        };
         fetchProduct();
     }, [params.id]);
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error}</p>;
-    if (!product) return <p>Product not found</p>;
+    if (loading) return <p className="p-4 text-center">Loading...</p>;
+    if (error) return <p className="p-4 text-center text-red-600">Error: {error}</p>;
+    if (!product) return <p className="p-4 text-center text-gray-500">Product not found</p>;
 
     return (
-        <div className="p-4">
-            <h1 className="text-2xl font-bold">{product.name}</h1>
-            <p>{product.description}</p>
-            <p className="font-semibold">${product.price}</p>
-            <p className="text-gray-500">{product.category}</p>
+        <div className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-lg mt-6">
+            <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+            <p className="text-gray-700 mb-6">{product.description}</p>
+            <div className="flex justify-between items-center mb-4">
+                <span className="text-2xl font-semibold text-green-600">${product.price}</span>
+                <span className="text-gray-500 italic">{product.category}</span>
+            </div>
+            <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                Add to Cart
+            </button>
         </div>
     );
 }

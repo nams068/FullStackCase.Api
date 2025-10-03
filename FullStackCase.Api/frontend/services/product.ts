@@ -6,12 +6,12 @@ export async function getAllProducts(): Promise<Product[]> {
     const res = await fetch(API_URL);
     if (!res.ok) throw new Error("Failed to fetch products");
     const data = await res.json();
-    return data.data; // backend response { source, data }
+    return data.data ?? data; 
 }
 
 export async function getProductById(id: number): Promise<Product> {
     const res = await fetch(`${API_URL}/${id}`);
     if (!res.ok) throw new Error("Failed to fetch product");
     const data = await res.json();
-    return data;
+    return data.data ?? data; 
 }
