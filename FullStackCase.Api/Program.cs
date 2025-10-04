@@ -19,6 +19,7 @@ var key = Encoding.UTF8.GetBytes("this_is_a_super_long_demo_secret_key_1234!");
 var redis = ConnectionMultiplexer.Connect("localhost:6379");
 
 
+
 // Serilog ekle
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()

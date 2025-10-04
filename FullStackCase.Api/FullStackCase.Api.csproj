@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <Folder Include="frontend\app\cart\" />
-    <Folder Include="frontend\components\" />
     <Folder Include="frontend\i18n\" />
     <Folder Include="Infrastructure\" />
   </ItemGroup>

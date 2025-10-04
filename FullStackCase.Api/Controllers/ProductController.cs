@@ -73,6 +73,41 @@ namespace FullStackCase.Api.Controllers
                 data = products
             });
         }
+        // GET: api/product/{id}
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            // Önce cache’ten kontrol
+            var cacheKey = $"product:{id}";
+            var cachedProduct = _cache.StringGet(cacheKey);
+
+            if (!cachedProduct.IsNullOrEmpty)
+            {
+                var productFromCache = JsonSerializer.Deserialize<Product>(cachedProduct, _jsonOptions);
+                return Ok(new
+                {
+                    source = "cache",
+                    data = productFromCache
+                });
+            }
+
+            // Cache yoksa database’den çek
+            var products = _getAllHandler.Handle();
+            var product = products.FirstOrDefault(p => p.Id == id);
+
+            if (product == null)
+                return NotFound();
+
+            // Cache’e yaz
+            _cache.StringSet(cacheKey, JsonSerializer.Serialize(product, _jsonOptions), TimeSpan.FromMinutes(5));
+
+            return Ok(new
+            {
+                source = "database",
+                data = product
+            });
+        }
+
 
         // POST: api/product (JWT ile korumalı)
         [HttpPost]

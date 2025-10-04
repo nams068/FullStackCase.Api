@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { getAllProducts } from "../../services/product";
 import { Product } from "../../types/Product";
+import Navbar from "../../components/Navbar"; 
 
 export default function ProductsPage() {
     const [products, setProducts] = useState<Product[]>([]);
@@ -22,7 +24,6 @@ export default function ProductsPage() {
                 const data = await getAllProducts();
                 setProducts(data);
                 setFilteredProducts(data);
-
 
                 const uniqueCategories = Array.from(new Set(data.map(p => p.category))).filter(Boolean);
                 setCategories(["All", ...uniqueCategories]);
@@ -58,58 +59,65 @@ export default function ProductsPage() {
     if (error) return <p className="p-4 text-center text-red-600">Error: {error}</p>;
 
     return (
-        <div className="p-6">
-            <div className="flex flex-wrap gap-4 mb-6">
-                <select
-                    value={selectedCategory}
-                    onChange={e => setSelectedCategory(e.target.value)}
-                    className="border p-2 rounded"
-                >
-                    {categories.map(cat => (
-                        <option key={cat} value={cat}>{cat}</option>
-                    ))}
-                </select>
-                <input
-                    type="number"
-                    placeholder="Min Price"
-                    value={minPrice}
-                    onChange={e => setMinPrice(e.target.value ? Number(e.target.value) : "")}
-                    className="border p-2 rounded"
-                />
-                <input
-                    type="number"
-                    placeholder="Max Price"
-                    value={maxPrice}
-                    onChange={e => setMaxPrice(e.target.value ? Number(e.target.value) : "")}
-                    className="border p-2 rounded"
-                />
-                <select
-                    value={sortOrder}
-                    onChange={e => setSortOrder(e.target.value)}
-                    className="border p-2 rounded"
-                >
-                    <option value="">Sort by Price</option>
-                    <option value="asc">Lowest ? Highest</option>
-                    <option value="desc">Highest ? Lowest</option>
-                </select>
-            </div>
+        <div className="p-0">
+            <Navbar /> {/* navbar burada */}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {filteredProducts.map(product => (
-                    <div
-                        key={product.id}
-                        className="border rounded-lg shadow-md p-5 hover:shadow-xl hover:scale-105 transition-transform duration-300 bg-white flex flex-col justify-between"
+            {/* Filters */}
+            <div className="p-6">
+                <div className="flex flex-wrap gap-4 mb-6">
+                    <select
+                        value={selectedCategory}
+                        onChange={e => setSelectedCategory(e.target.value)}
+                        className="border p-2 rounded"
                     >
-                        <div>
-                            <h2 className="text-lg font-bold mb-2">{product.name}</h2>
-                            <p className="text-gray-600 mb-4">{product.description}</p>
-                        </div>
-                        <div className="mt-auto">
-                            <p className="text-xl font-semibold text-green-600 mb-1">${product.price}</p>
-                            <p className="text-gray-500 text-sm">{product.category}</p>
-                        </div>
-                    </div>
-                ))}
+                        {categories.map(cat => (
+                            <option key={cat} value={cat}>{cat}</option>
+                        ))}
+                    </select>
+                    <input
+                        type="number"
+                        placeholder="Min Price"
+                        value={minPrice}
+                        onChange={e => setMinPrice(e.target.value ? Number(e.target.value) : "")}
+                        className="border p-2 rounded"
+                    />
+                    <input
+                        type="number"
+                        placeholder="Max Price"
+                        value={maxPrice}
+                        onChange={e => setMaxPrice(e.target.value ? Number(e.target.value) : "")}
+                        className="border p-2 rounded"
+                    />
+                    <select
+                        value={sortOrder}
+                        onChange={e => setSortOrder(e.target.value)}
+                        className="border p-2 rounded"
+                    >
+                        <option value="">Sort by Price</option>
+                        <option value="asc">Lowest to Highest</option>
+                        <option value="desc">Highest to Lowest</option>
+                    </select>
+                </div>
+
+                {/* Products */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    {filteredProducts.map(product => (
+                        <Link
+                            key={product.id}
+                            href={`/products/${product.id}`}
+                            className="border rounded-lg shadow-md p-5 hover:shadow-xl hover:scale-105 transition-transform duration-300 bg-white flex flex-col justify-between"
+                        >
+                            <div>
+                                <h2 className="text-lg font-bold mb-2">{product.name}</h2>
+                                <p className="text-gray-600 mb-4">{product.description}</p>
+                            </div>
+                            <div className="mt-auto">
+                                <p className="text-xl font-semibold text-green-600 mb-1">${product.price}</p>
+                                <p className="text-gray-500 text-sm">{product.category}</p>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
             </div>
         </div>
     );

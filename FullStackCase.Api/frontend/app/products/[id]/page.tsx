@@ -16,7 +16,8 @@ export default function ProductDetail({ params }: PageProps) {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const data = await getProductById(Number(params.id));
+                const { id } = await params; 
+                const data = await getProductById(Number(id));
                 setProduct(data);
             } catch (err: any) {
                 setError(err.message || "Failed to fetch product");
@@ -25,7 +26,7 @@ export default function ProductDetail({ params }: PageProps) {
             }
         };
         fetchProduct();
-    }, [params.id]);
+    }, [params]);
 
     if (loading) return <p className="p-4 text-center">Loading...</p>;
     if (error) return <p className="p-4 text-center text-red-600">Error: {error}</p>;

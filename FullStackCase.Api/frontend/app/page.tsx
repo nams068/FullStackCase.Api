@@ -1,10 +1,9 @@
 "use client";
-
-import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { getAllProducts } from "../services/product";
 import { Product } from "../types/Product";
+import Navbar from "../components/Navbar"; // import ettik
 
 export default function Home() {
     const [products, setProducts] = useState<Product[]>([]);
@@ -23,29 +22,7 @@ export default function Home() {
 
     return (
         <div className="min-h-screen bg-gray-50">
-            {/* Navbar */}
-            <nav className="bg-white shadow-md px-6 py-4 flex justify-between items-center">
-                <h1 className="text-2xl font-bold text-gray-800">KayraExport</h1>
-                <div className="flex items-center gap-4">
-                    <Link href="/auth/login">
-                        <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                            Login
-                        </button>
-                    </Link>
-                    <Link href="/auth/register">
-                        <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-                            Register
-                        </button>
-                    </Link>
-                    <div className="w-10 h-10 rounded-full bg-gray-300 overflow-hidden">
-                        <img
-                            src="/profile-placeholder.jpg"
-                            alt="Profile"
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
-                </div>
-            </nav>
+            <Navbar /> {/* navbar burada */}
 
             {/* Banner */}
             <div className="relative w-full h-64 sm:h-96">
@@ -56,7 +33,6 @@ export default function Home() {
                     style={{ objectFit: "cover" }}
                     priority
                 />
-
                 <div className="absolute inset-0 bg-black/30 flex flex-col justify-center items-center text-center text-white">
                     <h2 className="text-4xl sm:text-5xl font-bold mb-2">Big Summer Sale!</h2>
                     <p className="text-lg sm:text-xl">Up to 50% off on selected products</p>

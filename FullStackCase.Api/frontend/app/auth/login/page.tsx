@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { login } from "../../../services/auth";
 import { useDispatch } from "react-redux";
-import { setAuth } from "../../../store"; 
+import { setAuth } from "../../../store";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -12,6 +13,7 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch();
+    const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -27,6 +29,8 @@ export default function LoginPage() {
             localStorage.setItem("token", res.token);
 
             alert("Login successful!");
+
+            router.push("../"); 
         } catch (err: any) {
             setError(err.message || "Login failed");
         } finally {
