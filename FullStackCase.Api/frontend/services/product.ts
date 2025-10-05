@@ -15,3 +15,11 @@ export async function getProductById(id: number): Promise<Product> {
     const data = await res.json();
     return data.data ?? data; 
 }
+export async function getMyProducts(token: string) {
+    const res = await fetch("https://localhost:7025/api/Product/my-products", {
+        headers: { "Authorization": `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error("Failed to fetch my products");
+    return res.json();
+}
+

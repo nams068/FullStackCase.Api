@@ -28,11 +28,11 @@ export default function LoginPage() {
 
             localStorage.setItem("token", res.token);
 
-            alert("Login successful!");
+            alert("Giris basarili!");
 
-            router.push("../"); 
+            router.push("../");
         } catch (err: any) {
-            setError(err.message || "Login failed");
+            setError(err.message || "Giris basarisiz");
         } finally {
             setLoading(false);
         }
@@ -40,12 +40,12 @@ export default function LoginPage() {
 
     return (
         <div className="max-w-md mx-auto mt-20 p-6 border rounded shadow">
-            <h1 className="text-2xl font-bold mb-4">Login</h1>
+            <h1 className="text-2xl font-bold mb-4">Giris Yap</h1>
             {error && <p className="text-red-500 mb-4">{error}</p>}
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <input
                     type="email"
-                    placeholder="Email"
+                    placeholder="E-posta"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     className="border p-2 rounded"
@@ -53,7 +53,7 @@ export default function LoginPage() {
                 />
                 <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Sifre"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     className="border p-2 rounded"
@@ -64,13 +64,13 @@ export default function LoginPage() {
                     className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
                     disabled={loading}
                 >
-                    {loading ? "Logging in..." : "Login"}
+                    {loading ? "Giris yapiliyor..." : "Giris Yap"}
                 </button>
             </form>
             <p className="mt-4 text-sm">
-                Don&apos;t have an account?{" "}
+                Hesabin yok mu?{" "}
                 <a href="/auth/register" className="text-blue-600 underline">
-                    Register
+                    Kayit Ol
                 </a>
             </p>
         </div>

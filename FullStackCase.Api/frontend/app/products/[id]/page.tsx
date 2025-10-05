@@ -16,11 +16,11 @@ export default function ProductDetail({ params }: PageProps) {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const { id } = await params; 
+                const { id } = await params;
                 const data = await getProductById(Number(id));
                 setProduct(data);
             } catch (err: any) {
-                setError(err.message || "Failed to fetch product");
+                setError(err.message || "Urun bilgileri getirilemedi");
             } finally {
                 setLoading(false);
             }
@@ -28,9 +28,9 @@ export default function ProductDetail({ params }: PageProps) {
         fetchProduct();
     }, [params]);
 
-    if (loading) return <p className="p-4 text-center">Loading...</p>;
-    if (error) return <p className="p-4 text-center text-red-600">Error: {error}</p>;
-    if (!product) return <p className="p-4 text-center text-gray-500">Product not found</p>;
+    if (loading) return <p className="p-4 text-center">Yukleniyor...</p>;
+    if (error) return <p className="p-4 text-center text-red-600">Hata: {error}</p>;
+    if (!product) return <p className="p-4 text-center text-gray-500">Urun bulunamadi</p>;
 
     return (
         <div className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-lg mt-6">
@@ -41,7 +41,7 @@ export default function ProductDetail({ params }: PageProps) {
                 <span className="text-gray-500 italic">{product.category}</span>
             </div>
             <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
-                Add to Cart
+                Sepete Ekle
             </button>
         </div>
     );

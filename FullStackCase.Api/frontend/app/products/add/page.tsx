@@ -41,7 +41,7 @@ export default function AddProductPage() {
             });
 
             if (!res.ok) {
-                throw new Error("Product creation failed.");
+                throw new Error("Urun ekleme basarisiz.");
             }
 
             await res.json();
@@ -55,12 +55,12 @@ export default function AddProductPage() {
 
     return (
         <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-md mt-6">
-            <h1 className="text-2xl font-bold mb-4">Add New Product</h1>
+            <h1 className="text-2xl font-bold mb-4">Yeni Urun Ekle</h1>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <input
                     type="text"
                     name="name"
-                    placeholder="Product name"
+                    placeholder="Urun adi"
                     value={form.name}
                     onChange={handleChange}
                     required
@@ -68,7 +68,7 @@ export default function AddProductPage() {
                 />
                 <textarea
                     name="description"
-                    placeholder="Product description"
+                    placeholder="Urun aciklamasi"
                     value={form.description}
                     onChange={handleChange}
                     required
@@ -77,7 +77,7 @@ export default function AddProductPage() {
                 <input
                     type="number"
                     name="price"
-                    placeholder="Price"
+                    placeholder="Fiyat"
                     value={form.price}
                     onChange={handleChange}
                     required
@@ -86,7 +86,7 @@ export default function AddProductPage() {
                 <input
                     type="text"
                     name="category"
-                    placeholder="Category"
+                    placeholder="Kategori"
                     value={form.category}
                     onChange={handleChange}
                     required
@@ -98,7 +98,7 @@ export default function AddProductPage() {
                     disabled={loading}
                     className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700"
                 >
-                    {loading ? "Adding..." : "Add Product"}
+                    {loading ? "Ekleme suruyor..." : "Urun Ekle"}
                 </button>
             </form>
         </div>

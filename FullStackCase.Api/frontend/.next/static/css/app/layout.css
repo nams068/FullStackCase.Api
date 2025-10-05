@@ -536,6 +536,9 @@ video {
 .mb-6 {
   margin-bottom: 1.5rem;
 }
+.mt-1 {
+  margin-top: 0.25rem;
+}
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -562,9 +565,6 @@ video {
 }
 .h-10 {
   height: 2.5rem;
-}
-.h-40 {
-  height: 10rem;
 }
 .h-64 {
   height: 16rem;
@@ -850,6 +850,11 @@ body {
 .hover\:bg-red-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(185 28 28 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:text-blue-800:hover {
+  --tw-text-opacity: 1;
+  color: rgb(30 64 175 / var(--tw-text-opacity, 1));
 }
 
 .hover\:shadow-xl:hover {

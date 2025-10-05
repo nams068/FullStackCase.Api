@@ -3,9 +3,7 @@
 import { useState } from "react";
 import { register } from "../../../services/auth";
 import { useDispatch } from "react-redux";
-import { setAuth } from "../../../store/"; 
-
-
+import { setAuth } from "../../../store/";
 
 export default function RegisterPage() {
     const [username, setUsername] = useState("");
@@ -22,7 +20,7 @@ export default function RegisterPage() {
         setError(null);
 
         if (password !== confirmPassword) {
-            setError("Passwords do not match");
+            setError("Sifreler uyusmuyor");
             return;
         }
 
@@ -35,26 +33,22 @@ export default function RegisterPage() {
 
             localStorage.setItem("token", res.token);
 
-            alert("Registration successful!");
+            alert("Kayit basarili!");
         } catch (err: any) {
-            setError(err.message || "Register failed");
+            setError(err.message || "Kayit basarisiz");
         } finally {
             setLoading(false);
         }
     };
 
-
-
-
-
     return (
         <div className="max-w-md mx-auto mt-20 p-6 border rounded shadow">
-            <h1 className="text-2xl font-bold mb-4">Register</h1>
+            <h1 className="text-2xl font-bold mb-4">Kayit Ol</h1>
             {error && <p className="text-red-500 mb-4">{error}</p>}
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <input
                     type="text"
-                    placeholder="Username"
+                    placeholder="Kullanici adi"
                     value={username}
                     onChange={e => setUsername(e.target.value)}
                     className="border p-2 rounded"
@@ -62,7 +56,7 @@ export default function RegisterPage() {
                 />
                 <input
                     type="email"
-                    placeholder="Email"
+                    placeholder="E-posta"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     className="border p-2 rounded"
@@ -70,7 +64,7 @@ export default function RegisterPage() {
                 />
                 <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Sifre"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     className="border p-2 rounded"
@@ -78,7 +72,7 @@ export default function RegisterPage() {
                 />
                 <input
                     type="password"
-                    placeholder="Confirm Password"
+                    placeholder="Sifreyi Onayla"
                     value={confirmPassword}
                     onChange={e => setConfirmPassword(e.target.value)}
                     className="border p-2 rounded"
@@ -89,13 +83,13 @@ export default function RegisterPage() {
                     className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
                     disabled={loading}
                 >
-                    {loading ? "Registering..." : "Register"}
+                    {loading ? "Kayit yapiliyor..." : "Kayit Ol"}
                 </button>
             </form>
             <p className="mt-4 text-sm">
-                Already have an account?{" "}
+                Hesabin var mi?{" "}
                 <a href="/auth/login" className="text-blue-600 underline">
-                    Login
+                    Giris Yap
                 </a>
             </p>
         </div>

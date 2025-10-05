@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { getAllProducts } from "../../services/product";
 import { Product } from "../../types/Product";
-import Navbar from "../../components/Navbar"; 
+import Navbar from "../../components/Navbar";
 
 export default function ProductsPage() {
     const [products, setProducts] = useState<Product[]>([]);
@@ -28,7 +28,7 @@ export default function ProductsPage() {
                 const uniqueCategories = Array.from(new Set(data.map(p => p.category))).filter(Boolean);
                 setCategories(["All", ...uniqueCategories]);
             } catch (err: any) {
-                setError(err.message || "Failed to fetch products");
+                setError(err.message || "Urunler yuklenemedi");
             } finally {
                 setLoading(false);
             }
@@ -55,14 +55,14 @@ export default function ProductsPage() {
         setFilteredProducts(tempProducts);
     }, [products, selectedCategory, minPrice, maxPrice, sortOrder]);
 
-    if (loading) return <p className="p-4 text-center">Loading...</p>;
-    if (error) return <p className="p-4 text-center text-red-600">Error: {error}</p>;
+    if (loading) return <p className="p-4 text-center">Urunler yukleniyor...</p>;
+    if (error) return <p className="p-4 text-center text-red-600">Hata: {error}</p>;
 
     return (
         <div className="p-0">
             <Navbar /> {/* navbar burada */}
 
-            {/* Filters */}
+            {/* Filtreler */}
             <div className="p-6">
                 <div className="flex flex-wrap gap-4 mb-6">
                     <select
@@ -76,14 +76,14 @@ export default function ProductsPage() {
                     </select>
                     <input
                         type="number"
-                        placeholder="Min Price"
+                        placeholder="Minimum Fiyat"
                         value={minPrice}
                         onChange={e => setMinPrice(e.target.value ? Number(e.target.value) : "")}
                         className="border p-2 rounded"
                     />
                     <input
                         type="number"
-                        placeholder="Max Price"
+                        placeholder="Maksimum Fiyat"
                         value={maxPrice}
                         onChange={e => setMaxPrice(e.target.value ? Number(e.target.value) : "")}
                         className="border p-2 rounded"
@@ -93,13 +93,13 @@ export default function ProductsPage() {
                         onChange={e => setSortOrder(e.target.value)}
                         className="border p-2 rounded"
                     >
-                        <option value="">Sort by Price</option>
-                        <option value="asc">Lowest to Highest</option>
-                        <option value="desc">Highest to Lowest</option>
+                        <option value="">Fiyata Gore Sirala</option>
+                        <option value="asc">Dusukten Yuksege</option>
+                        <option value="desc">Yuksekten Dusege</option>
                     </select>
                 </div>
 
-                {/* Products */}
+                {/* Urunler */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {filteredProducts.map(product => (
                         <Link

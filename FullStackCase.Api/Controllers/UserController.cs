@@ -1,6 +1,8 @@
 ﻿using FullStackCase.Api.Data;
 using FullStackCase.Api.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FullStackCase.Api.Controllers
 {
@@ -31,6 +33,55 @@ namespace FullStackCase.Api.Controllers
             var users = _context.Users.ToList();
             return Ok(users);
         }
+        // GET: api/user/me
+        [HttpGet("me")]
+        [Authorize]
+        public IActionResult GetProfile()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
+
+            var user = _context.Users.FirstOrDefault(u => u.Id.ToString() == userId);
+            if (user == null) return NotFound();
+
+            return Ok(new
+            {
+                Id = user.Id,
+                Username = user.Username,
+                Email = user.Email
+            });
+        }
+        // PATCH: api/user/me
+        [HttpPatch("me")]
+        [Authorize]
+        public IActionResult UpdateProfile([FromBody] User updatedUser)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
+
+            var user = _context.Users.FirstOrDefault(u => u.Id.ToString() == userId);
+            if (user == null) return NotFound();
+
+            // Sadece gelen alanları güncelle
+            if (!string.IsNullOrEmpty(updatedUser.Username))
+                user.Username = updatedUser.Username;
+
+            if (!string.IsNullOrEmpty(updatedUser.Email))
+                user.Email = updatedUser.Email;
+
+            if (!string.IsNullOrEmpty(updatedUser.PasswordHash))
+                user.PasswordHash = updatedUser.PasswordHash;
+
+            _context.SaveChanges();
+
+            return Ok(new
+            {
+                Id = user.Id,
+                Username = user.Username,
+                Email = user.Email
+            });
+        }
+
 
     }
 }
