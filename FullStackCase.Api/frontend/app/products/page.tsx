@@ -61,7 +61,6 @@ export default function ProductsPage() {
     return (
         <div className="p-0">
             <Navbar /> {/* navbar burada */}
-
             {/* Filtreler */}
             <div className="p-6">
                 <div className="flex flex-wrap gap-4 mb-6">
@@ -97,6 +96,27 @@ export default function ProductsPage() {
                         <option value="asc">Dusukten Yuksege</option>
                         <option value="desc">Yuksekten Dusege</option>
                     </select>
+                </div>
+                {/* Admin Islemleri Butonlari */}
+                <div className="flex gap-4 mb-4">
+                    <a
+                        href="../products/add"
+                        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                    >
+                        Urun Ekle
+                    </a>
+                    <a
+                        href="../products/edit"
+                        className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition"
+                    >
+                        Urun Guncelle
+                    </a>
+                    <a
+                        href="../products/delete"
+                        className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+                    >
+                        Urun Sil
+                    </a>
                 </div>
 
                 {/* Urunler */}

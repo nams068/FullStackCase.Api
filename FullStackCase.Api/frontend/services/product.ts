@@ -22,4 +22,25 @@ export async function getMyProducts(token: string) {
     if (!res.ok) throw new Error("Failed to fetch my products");
     return res.json();
 }
+export async function updateProduct(id: number, product: Partial<Product>, token: string) {
+    const res = await fetch(`${API_URL}/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(product),
+    });
+    if (!res.ok) throw new Error("Failed to update product");
+    return res.json();
+}
+
+export async function deleteProduct(id: number, token: string) {
+    const res = await fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) throw new Error("Failed to delete product");
+    return true;
+}
 

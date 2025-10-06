@@ -31,7 +31,11 @@ export default function Navbar() {
 
     return (
         <nav className="bg-white shadow-md px-6 py-4 flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-800">KayraExport</h1>
+            <Link href="/">
+                <h1 className="text-2xl font-bold text-gray-800 cursor-pointer">
+                    KayraExport
+                </h1>
+            </Link>
             <div className="flex items-center gap-4">
                 {token ? (
                     <div className="relative" ref={menuRef}>
@@ -49,6 +53,9 @@ export default function Navbar() {
                             <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow-md z-[1000]">
                                 <Link href="../profile" className="block px-4 py-2 hover:bg-gray-100">
                                     Profile
+                                </Link>
+                                <Link href="../products" className="block px-4 py-2 hover:bg-gray-100">
+                                    Urunler
                                 </Link>
                                 <button
                                     onClick={handleLogout}

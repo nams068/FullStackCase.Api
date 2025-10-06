@@ -1,6 +1,8 @@
 {
-  "/page": "app/page.js",
-  "/profile/page": "app/profile/page.js",
+  "/products/edit/page": "app/products/edit/page.js",
   "/products/page": "app/products/page.js",
-  "/auth/register/page": "app/auth/register/page.js"
+  "/products/add/page": "app/products/add/page.js",
+  "/profile/page": "app/profile/page.js",
+  "/page": "app/page.js",
+  "/auth/login/page": "app/auth/login/page.js"
 }

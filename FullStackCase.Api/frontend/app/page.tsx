@@ -84,7 +84,6 @@ export default function Home() {
                         Tumunu Gor
                     </a>
                 </div>
-
                 {/* Filtreleme */}
                 <div className="flex flex-wrap gap-4 mb-6">
                     <select
