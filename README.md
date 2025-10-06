@@ -25,7 +25,7 @@ Docker kullanılarak PostgreSQL ve pgAdmin ile çalışacak şekilde yapılandı
 2. Zip dosyasını aç ve uygun bir klasöre çıkar.
 
 ### b) Git Clone ile
-git clone https://github.com/kullaniciadi/proje-adi.git
+git clone https://github.com/nams068/FullStackCase.Api
 cd proje-adi
 
 ---
