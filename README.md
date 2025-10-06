@@ -28,5 +28,3 @@ Docker kullanılarak PostgreSQL ve pgAdmin ile çalışacak şekilde yapılandı
 ```bash
 git clone https://github.com/kullaniciadi/proje-adi.git
 cd proje-adi
-git clone https://github.com/kullaniciadi/proje-adi.git
-cd proje-adi
