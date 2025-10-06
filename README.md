@@ -26,7 +26,7 @@ Docker kullanılarak PostgreSQL ve pgAdmin ile çalışacak şekilde yapılandı
 
 ### b) Git Clone ile
 git clone https://github.com/nams068/FullStackCase.Api
-cd proje-adi
+cd FullStackCase.Api
 
 ---
 
