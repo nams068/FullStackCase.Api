@@ -35,7 +35,7 @@ export default function Navbar() {
                 <h1 className="text-2xl font-bold text-gray-800 cursor-pointer">
                     KayraExport
                 </h1>
-            </Link>
+            </Link> 
             <div className="flex items-center gap-4">
                 {token ? (
                     <div className="relative" ref={menuRef}>
